@@ -1,0 +1,4 @@
+subjectAltName=DNS:counting.cloud.io
+basicConstraints=CA:FALSE
+keyUsage=digitalSignature, keyEncipherment
+extendedKeyUsage=serverAuth
