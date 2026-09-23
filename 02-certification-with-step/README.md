@@ -11,7 +11,7 @@
 ➜ step certificate create mycloud-ca root-ca.crt root-ca.key --profile root-ca --subtle \
    --no-password --kty RSA --insecure --not-after="87600h"
 
-➜ ls -la
+➜ ls -la \
 -rw-------@  1 nin  staff  1086 Sep 23 13:58 root-ca.crt
 -rw-------@  1 nin  staff  1675 Sep 23 13:58 root-ca.key
 
@@ -22,7 +22,7 @@
 ➜ step certificate create dashboard.cloud.io dashboard.crt dashboard.key --profile leaf --subtle \
    --no-password --kty RSA --insecure --not-after="8760h" --ca root-ca.crt --ca-key root-ca.key
 
-➜ ls -la
+➜ ls -la  \
 -rw-------@  1 nin  staff  1131 Sep 23 14:04 dashboard.crt
 -rw-------@  1 nin  staff  1675 Sep 23 14:04 dashboard.key
 -rw-------@  1 nin  staff  1086 Sep 23 13:58 root-ca.crt
@@ -44,7 +44,7 @@ certificate chain => root-ca.crt
 security -> certificate -> import certificate
 
 ### Step 9 - Allow 443 in dashboard-alb-sg
-![App Screenshot](dashboard-inbound-443.png)
+![App Screenshot](images/dashboard-inbound-443.png)
 
 ### Step 10 - Create leaf certificate signed by Root CA
 #### If client is VM
@@ -66,7 +66,10 @@ $ sudo tee /etc/pki/ca-trust/source/anchors/private-ca.pem > /dev/null <<'CACERT
 $ sudo update-ca-trust extract
 $ sudo systemctl restart dashboard.service
 ### Step 13 - Change to https in /ect/systemd/system/counting.service
-![App Screenshot](counting-service-https.png)
+![App Screenshot](images/counting-service-https.png)
 
 ### Step 14 - Allow 443 in counting-alb-sg
-![App Screenshot](counting-inbound-443.png)
+![App Screenshot](images/counting-inbound-443.png)
+
+### Result
+![App Screenshot](images/result.png)
