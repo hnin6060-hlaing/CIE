@@ -3,10 +3,10 @@
 1. run as binary
 2. run as containers (using docker compose)
 
-# Binaries: 
+#### Binaries are below: 
 https://github.com/nicholasjackson/fake-service/releases/
 
-# Run as binary
+# 1. Run as binary
 #### Rating
 ```
 LISTEN_ADDR="0.0.0.0:9001" \
@@ -48,4 +48,8 @@ LISTEN_ADDR="0.0.0.0:9006" \
 MESSAGE="Product App" \
 NAME="Product App (Fake Service)" \
 UPSTREAM_URIS="0.0.0.0:9002,0.0.0.0:9003,0.0.0.0:9004,0.0.0.0:9005" ./fake-service
+```
+# 2. Run as containers (using docker compose)
+```
+docker compose up
 ```
