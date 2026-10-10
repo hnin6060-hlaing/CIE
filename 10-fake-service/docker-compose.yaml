@@ -1,0 +1,52 @@
+services:
+  rating:
+    image: nicholasjackson/fake-service:v0.26.2
+    environment:
+      LISTEN_ADDR: 0.0.0.0:8001
+      NAME: "rating"
+      MESSAGE: "Rating App (Fake Service)"
+  review-v1:
+    image: nicholasjackson/fake-service:v0.26.2
+    environment:
+      LISTEN_ADDR: 0.0.0.0:8002
+      NAME: "review-v1"
+      MESSAGE: "Review V1 App (Fake Service)"
+  review-v2:
+    image: nicholasjackson/fake-service:v0.26.2
+    environment:
+      LISTEN_ADDR: 0.0.0.0:8003
+      NAME: "review-v2"
+      MESSAGE: "Review V2 App (Fake Service)"
+      UPSTREAM_URIS: "http://rating:8001"
+    depends_on:
+      - rating
+  review-v3:
+    image: nicholasjackson/fake-service:v0.26.2
+    environment:
+      LISTEN_ADDR: 0.0.0.0:8004
+      NAME: "review-v3"
+      MESSAGE: "Review V3 App (Fake Service)"
+      UPSTREAM_URIS: "http://rating:8001"
+    depends_on:
+      - rating
+  detail:
+    image: nicholasjackson/fake-service:v0.26.2
+    environment:
+      LISTEN_ADDR: 0.0.0.0:8005
+      NAME: "detail"
+      MESSAGE: "Detail App (Fake Service)"
+  product:
+    image: nicholasjackson/fake-service:v0.26.2
+    environment:
+      LISTEN_ADDR: 0.0.0.0:8006
+      NAME: "Product"
+      MESSAGE: "Product App (Fake Service)"
+      UPSTREAM_URIS: "http://review-v1:8002,http://review-v2:8003,http://review-v3:8004,http://detail:8005"
+    ports:
+      - 8006:8006
+    depends_on:
+      - rating
+      - review-v1
+      - review-v2
+      - review-v3
+      - detail
