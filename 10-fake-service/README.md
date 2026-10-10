@@ -1,7 +1,8 @@
 
 ### As a practice exercise, use fake-service to run as BookInfo Style Architecture.
-1. run as binary \
+1. run as binary
 2. run as containers (using docker compose)
+
 # Binaries: 
 https://github.com/nicholasjackson/fake-service/releases/
 
