@@ -5,12 +5,14 @@ services:
       LISTEN_ADDR: 0.0.0.0:8001
       NAME: "rating"
       MESSAGE: "Rating App (Fake Service)"
+      TRACING_ZIPKIN: "http://jaeger:9411"
   review-v1:
     image: nicholasjackson/fake-service:v0.26.2
     environment:
       LISTEN_ADDR: 0.0.0.0:8002
       NAME: "review-v1"
       MESSAGE: "Review V1 App (Fake Service)"
+      TRACING_ZIPKIN: "http://jaeger:9411"
   review-v2:
     image: nicholasjackson/fake-service:v0.26.2
     environment:
@@ -18,6 +20,7 @@ services:
       NAME: "review-v2"
       MESSAGE: "Review V2 App (Fake Service)"
       UPSTREAM_URIS: "http://rating:8001"
+      TRACING_ZIPKIN: "http://jaeger:9411"
     depends_on:
       - rating
   review-v3:
@@ -27,6 +30,7 @@ services:
       NAME: "review-v3"
       MESSAGE: "Review V3 App (Fake Service)"
       UPSTREAM_URIS: "http://rating:8001"
+      TRACING_ZIPKIN: "http://jaeger:9411"
     depends_on:
       - rating
   detail:
@@ -35,6 +39,7 @@ services:
       LISTEN_ADDR: 0.0.0.0:8005
       NAME: "detail"
       MESSAGE: "Detail App (Fake Service)"
+      TRACING_ZIPKIN: "http://jaeger:9411"
   product:
     image: nicholasjackson/fake-service:v0.26.2
     environment:
@@ -42,6 +47,7 @@ services:
       NAME: "Product"
       MESSAGE: "Product App (Fake Service)"
       UPSTREAM_URIS: "http://review-v1:8002,http://review-v2:8003,http://review-v3:8004,http://detail:8005"
+      TRACING_ZIPKIN: "http://jaeger:9411"
     ports:
       - 8006:8006
     depends_on:
@@ -50,3 +56,10 @@ services:
       - review-v2
       - review-v3
       - detail
+  jaeger:
+    image: jaegertracing/all-in-one:1.32
+    environment:
+      COLLECTOR_ZIPKIN_HOST_PORT: ":9411"
+    ports:
+      - "16686:16686" # Jaeger Web UI
+      - "9411:9411"
