@@ -53,3 +53,10 @@ UPSTREAM_URIS="0.0.0.0:9002,0.0.0.0:9003,0.0.0.0:9004,0.0.0.0:9005" ./fake-servi
 ```
 docker compose up
 ```
+
+# Test Result
+#### Output with /ui
+<img width="2090" height="1568" alt="image" src="https://github.com/user-attachments/assets/aa241df6-9b46-4f42-ba67-c11c5591ca2a" />
+
+#### Output with Jaejer UI
+<img width="2932" height="1412" alt="image" src="https://github.com/user-attachments/assets/cf1a3947-e6ce-4e62-bf07-eb975b315ae5" />
